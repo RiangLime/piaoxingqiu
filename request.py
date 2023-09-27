@@ -327,6 +327,50 @@ def create_order(show_id, session_id, seat_plan_id, price: int, qty: int, delive
                 }
             ]
         }
+    elif deliver_method == "ID_CARD":
+        data = {
+            "priceItemParam": [
+                {
+                    "applyTickets": [],
+                    "priceItemName": "票款总额",
+                    "priceItemVal": price * qty,
+                    "priceItemType": "TICKET_FEE",
+                    "priceItemSpecies": "SEAT_PLAN",
+                    "direction": "INCREASE",
+                    "priceDisplay": "￥" + str(price * qty)
+                }
+            ],
+            "one2oneAudiences": [
+                {
+                    "audienceId": "650001a4c8fc340001c5466d",
+                    "sessionId": session_id
+                },
+                {
+                    "audienceId": "650001d774acb600015e2c40",
+                    "sessionId": session_id
+                }
+            ],
+            "items": [
+                {
+                    "skus": [
+                        {
+                            "seatPlanId": seat_plan_id,
+                            "sessionId": session_id,
+                            "showId": show_id,
+                            "skuId": seat_plan_id,
+                            "skuType": "SINGLE",
+                            "ticketPrice": price,
+                            "qty": qty,
+                            "deliverMethod": deliver_method
+                        }
+                    ],
+                    "spu": {
+                        "id": show_id,
+                        "spuType": "SINGLE"
+                    }
+                }
+            ]
+        }
     else:
         raise Exception("不支持的deliver_method:" + str(deliver_method))
 
