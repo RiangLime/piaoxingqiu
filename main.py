@@ -14,20 +14,31 @@ session_id = config.session_id
 buy_count = config.buy_count
 audience_idx = config.audience_idx
 deliver_method = config.deliver_method
-seat_plan_id = ''
+seat_id = config.seat_id
+seat_price = config.seat_price
 session_id_exclude = []  # 被排除掉的场次
 price = 0
 
+success = 0
+targetSeatFail = 0
+
+
 def runThread():
-    global session_id
+    global session_id, success
+    global seat_plan_id
     global show_id
     global buy_count
     global audience_idx
     global deliver_method
-    global seat_plan_id
+    global seat_id
+    global seat_price
     global session_id_exclude
     global price
+    global targetSeatFail
     while True:
+        if success == 1:
+            print("抢到票啦 债见")
+            break
         try:
             # 如果没有指定场次，则默认从第一场开始刷
             if not session_id:
@@ -52,20 +63,39 @@ def runThread():
             print("余票信息")
             print(seat_count)
 
+            seat_plan_id = ''
             for i in seat_count:
-                if i["canBuyCount"] >= buy_count:
-                    seat_plan_id = i["seatPlanId"]
-                    for j in seat_plans:
-                        if j["seatPlanId"] == seat_plan_id:
-                            price = j["originalPrice"]  # 门票单价
+                # 如果指定座位还没卖完 就抢指定座位
+                if targetSeatFail == 0:
+                    # 只抢指定座位
+                    if i["seatPlanId"] == seat_id:
+                        if i["canBuyCount"] >= buy_count:
+                            seat_plan_id = i["seatPlanId"]
+                            for j in seat_plans:
+                                if j["seatPlanId"] == seat_plan_id:
+                                    price = j["originalPrice"]  # 门票单价
+                                    break
                             break
-                    break
+                        else:
+                            targetSeatFail = 1
+                            print("您要的座位卖完啦...将为您购买其余座位\n")
+                else:
+                    if i["canBuyCount"] >= buy_count:
+                        seat_plan_id = i["seatPlanId"]
+                        for j in seat_plans:
+                            if j["seatPlanId"] == seat_plan_id:
+                                price = j["originalPrice"]  # 门票单价
+                                break
+                        break
+
+
             # 如果没有拿到seat_plan_id，说明该场次所有座位的余票都不满足购票数量需求，就重新开始刷下一场次
             if not seat_plan_id:
                 print("该场次" + session_id + "没有符合条件的座位，将为你继续搜寻其他在售场次")
                 # session_id_exclude.append(session_id)  # 排除掉这个场次
                 # session_id = ''
                 continue
+
 
             if not deliver_method:
                 deliver_method = request.get_deliver_method(show_id, session_id, seat_plan_id, price, buy_count)
@@ -103,14 +133,15 @@ def runThread():
                                          None, None, None, None, audience_ids)
                 else:
                     print("不支持的deliver_method:" + deliver_method)
+            success = 1
             break
         except Exception as e:
             print(e)
             # session_id_exclude.append(session_id)  # 排除掉这个场次
             # session_id = ''
-
-
 exitFlag = 0
+
+
 class myThread(threading.Thread):  # 继承父类threading.Thread
     def __init__(self, threadID, name, counter):
         threading.Thread.__init__(self)
@@ -131,15 +162,29 @@ def print_time(threadName, delay, counter):
         "%s: %s" % (threadName, time.ctime(time.time()))
         counter -= 1
 
+
 # 创建两个线程
 # 创建新线程
-thread1 = myThread(1, "Thread-1", 1)
-thread2 = myThread(2, "Thread-2", 2)
-thread3 = myThread(3, "Thread-2", 2)
-thread4 = myThread(4, "Thread-2", 2)
+thread1 = myThread(11, "Thread-11", 1)
+thread2 = myThread(12, "Thread-12", 2)
+thread3 = myThread(13, "Thread-13", 3)
+thread4 = myThread(14, "Thread-14", 4)
+thread5 = myThread(15, "Thread-15", 5)
+thread6 = myThread(16, "Thread-16", 6)
+thread7 = myThread(17, "Thread-17", 7)
+thread8 = myThread(18, "Thread-18", 8)
+thread9 = myThread(19, "Thread-19", 9)
+thread0 = myThread(10, "Thread-10", 10)
+
 
 # 开启线程
 thread1.start()
 thread2.start()
 thread3.start()
-thread4.start()
+# thread4.start()
+# thread5.start()
+# thread6.start()
+# thread7.start()
+# thread8.start()
+# thread9.start()
+# thread0.start()

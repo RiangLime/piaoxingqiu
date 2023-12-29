@@ -340,16 +340,7 @@ def create_order(show_id, session_id, seat_plan_id, price: int, qty: int, delive
                     "priceDisplay": "￥" + str(price * qty)
                 }
             ],
-            "one2oneAudiences": [
-                {
-                    "audienceId": "650001a4c8fc340001c5466d",
-                    "sessionId": session_id
-                },
-                {
-                    "audienceId": "650001d774acb600015e2c40",
-                    "sessionId": session_id
-                }
-            ],
+            "one2oneAudiences": [{"audienceId": i, "sessionId": session_id} for i in audience_ids],
             "items": [
                 {
                     "skus": [
