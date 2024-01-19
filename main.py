@@ -88,14 +88,12 @@ def runThread():
                                 break
                         break
 
-
             # 如果没有拿到seat_plan_id，说明该场次所有座位的余票都不满足购票数量需求，就重新开始刷下一场次
             if not seat_plan_id:
                 print("该场次" + session_id + "没有符合条件的座位，将为你继续搜寻其他在售场次")
                 # session_id_exclude.append(session_id)  # 排除掉这个场次
                 # session_id = ''
                 continue
-
 
             if not deliver_method:
                 deliver_method = request.get_deliver_method(show_id, session_id, seat_plan_id, price, buy_count)
@@ -139,6 +137,8 @@ def runThread():
             print(e)
             # session_id_exclude.append(session_id)  # 排除掉这个场次
             # session_id = ''
+
+
 exitFlag = 0
 
 
@@ -163,6 +163,12 @@ def print_time(threadName, delay, counter):
         counter -= 1
 
 
+# sessions = request.get_sessions(show_id)
+# for i in sessions:
+#     session_id = i["bizShowSessionId"]
+#     print("session_id:" + session_id)
+
+
 # 创建两个线程
 # 创建新线程
 thread1 = myThread(11, "Thread-11", 1)
@@ -176,11 +182,10 @@ thread8 = myThread(18, "Thread-18", 8)
 thread9 = myThread(19, "Thread-19", 9)
 thread0 = myThread(10, "Thread-10", 10)
 
-
 # 开启线程
 thread1.start()
-thread2.start()
-thread3.start()
+# thread2.start()
+# thread3.start()
 # thread4.start()
 # thread5.start()
 # thread6.start()
@@ -188,3 +193,6 @@ thread3.start()
 # thread8.start()
 # thread9.start()
 # thread0.start()
+
+# seat_plans = request.get_seat_plans(show_id, session_id)
+# print(seat_plans)

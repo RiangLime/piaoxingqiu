@@ -1,16 +1,14 @@
 # 输入自己的token
-token = 'eyJ0eXAiOiJKV1QiLCJjdHkiOiJKV1QiLCJ6aXAiOiJERUYiLCJhbGciOiJSUzUxMiJ9.eNqEkEFPAyEUhP_LO-_hQVmW7bGmRhONSWMPngzLvk03WaAB1qhN_7tsMdqT3mAy8w3MCbye0-HeDR7Wbp6mCuZIodxP0I2fN74nWMPt3cPrI1QQ527zI0ouG62QqOdM1YI3Sg5MtCL7cnLnp8W02b9sd1mxyewXdL8Ea0RkytQSOyMuZ8KhlSX4n03BuQJ6P46BnkebO1iDLTIu68VzQTwdKejk_8Q0uc0E0umXslICleArlSnxIyay5adlGUvBHLRL12vlZ1z3V_BGIY7eZZGVLZ2234TzFwAAAP__.K8MdvFsXzP3i5V8dRUO-4hMXhV8XCV32rF6ORRzDu95aNWctdWZQa0-rb6yiP7iGSaQ5l4bvHnAWYrkfHfGm3fV8PcKx0tTkR5IA_sGDt6Y9NGZi3ohvtdl0OlrY-yT3XbcnliBic5wXdHkmQ_0oN6iVJu6SKYiwWgwK4fNwupE'
+token = 'eyJ0eXAiOiJKV1QiLCJjdHkiOiJKV1QiLCJ6aXAiOiJERUYiLCJhbGciOiJSUzUxMiJ9.eNqEkEFvwjAMhf-Lzz3EbtIWjqBNIIEmoXHYCYXUiEptgtJ0giH--1IF0E7j6Kf3-fn5Ck4P4bi0BwdTO7RtBkPPPs1X2Dc_c1czTOF9sdqtIYN-2M-eYkFFqSvBXBNWSlJZFQeUExl9kdy4djTNtl9vm6h0wWzH1fUIKj3hOkcyRkgSQiCjRIUJfGXL4ZYBn0-N58-m48fhkfw4sdfB_UtTDDGedbjDWApV5AoJlZSx4KUP3KWCaW_H3hy1DX-fFNPvpKScMINv9n3jbBTTB61-HHb7BQAA__8.SpUNK_uarPZkuhaqH5Yr3E1q9HOD5vpdBbg5Yh69VdZhYtEbWwVnJSCEr8YpiljTgNYfHzF1m_gpc--0BqDAa33PMOZkpD0A8PS-IiLac46AxDGw5aLuh_3989JVmHipVxFB8w-Cmq2oM0xPYQz8x0fN-ZVjbnnqSy5aoFgOMSs'
 
+# 项目id，必填  showId
+show_id = '65a4de4260a4790001cecd87'
+# 指定场次id，不指定则默认从第一场开始遍历 bizShowSessionId
+session_id = '65a4de50d6b3880001ab7484'
 
-# 项目id，必填
-show_id = '6559fb4957a50200013819c7'
-# 指定场次id，不指定则默认从第一场开始遍历
-
-session_id = '6559fb7957a5020001381e3e'
-
-# 指定座位
-seat_id = '656d8ed29c2ae5000134a859'
-seat_price = 380
+# 指定座位 seatPlanId
+seat_id = '65a4e262455ed9000161d19b'
+seat_price = 480
 # 购票数量，一定要看购票须知，不要超过上限
 buy_count = 1
 # 指定观演人，观演人序号从0开始，人数需与票数保持一致

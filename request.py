@@ -256,8 +256,11 @@ def create_order(show_id, session_id, seat_plan_id, price: int, qty: int, delive
                 "sessionIds": [
                     session_id
                 ]
-            }
+            },
+            "one2oneAudiences": [{"audienceId": i, "sessionId": session_id} for i in audience_ids]
         }
+
+
     elif deliver_method == "VENUE":
         data = {
             "priceItemParam": [
